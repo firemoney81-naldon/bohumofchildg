@@ -1,23 +1,597 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema Markup for Service Snippet -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "어린이 실비보험 컨설팅",
+      "provider": {
+        "@type": "Organization",
+        "name": "아이실비보험 전문 컨설팅 센터",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "고객 서비스"
+        }
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "description": "2026년 아이실비보험 가입 및 비교 분석 서비스 제공",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "아이실비보험 상품 비교 견적",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "표준형 어린이 실손보험"
+            },
+            "price": "15000",
+            "priceCurrency": "KRW",
+            "description": "일반적인 질병/상해 치료비 보장"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "선택형 어린이 실손보험"
+            },
+            "price": "18000",
+            "priceCurrency": "KRW",
+            "description": "비급여 항목 일부 보장 강화"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "프리미엄 어린이 종합보험"
+            },
+            "price": "30000",
+            "priceCurrency": "KRW",
+            "description": "실손 외 3대 진단비, 입원일당 등 종합 보장"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Google Fonts for better readability (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+      /* --- Base Style --- */
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.8; /* Increased line-height for readability */
+        background-color: #f5f8fb; /* Soft background color */
+        color: #2c3e50; /* Darker text for contrast */
+      }
+      header {
+        background-color: #007bff; /* Vibrant blue */
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+      header h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+      }
+      header p {
+        font-size: 1.1rem;
+        margin-top: 0;
+        opacity: 0.9;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.5rem;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border-radius: 25px;
+      }
+      nav a:hover {
+        background-color: #ffffff;
+        color: #007bff;
+      }
+      main {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+        background-color: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        border-radius: 12px;
+      }
+      section {
+        padding: 3rem 0;
+      }
+      h2, h3, h4 {
+        color: #007bff; /* Primary color for headings */
+        border-bottom: 2px solid #e0eaff; /* Light bottom border for separation */
+        padding-bottom: 0.5rem;
+        margin-top: 2.5rem;
+      }
+      h2 { font-size: 2rem; }
+      h3 { font-size: 1.5rem; }
+      h4 { font-size: 1.25rem; }
+
+      /* --- Specific Section Styles --- */
+      .highlight {
+        background-color: #e6f7ff; /* Light blue background for emphasis */
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+        border-left: 5px solid #007bff;
+      }
+      .keyword-tags {
+        margin: 2rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .keyword-tags a {
+        background-color: #e0f0ff;
+        color: #004080;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border: 1px solid #cceeff;
+      }
+      .keyword-tags a:hover {
+        background-color: #007bff;
+        color: white;
+      }
+
+      /* --- Table Styling --- */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        overflow: hidden; /* Ensures rounded corners apply to content */
+      }
+      th, td {
+        padding: 1rem;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #f0f8ff; /* Light blue header */
+        color: #004080;
+        font-weight: 700;
+        text-align: center;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9; /* Zebra striping for readability */
+      }
+      .table-responsive {
+        overflow-x: auto;
+      }
+
+      /* --- Interactive Elements --- */
+      dl dt {
+        font-weight: 700;
+        margin-top: 1.5rem;
+        cursor: pointer;
+        color: #007bff;
+        padding: 1rem;
+        background-color: #f0f8ff;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+        border-left: 4px solid #007bff;
+      }
+      dl dt:hover {
+        background-color: #e0eaff;
+      }
+      dl dd {
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px dashed #ddd;
+        display: none;
+      }
+      dl dt.active + dd {
+        display: block;
+      }
+      .cta-button {
+        display: block;
+        width: 100%;
+        background-color: #ff6600; /* Orange CTA color */
+        color: white;
+        font-weight: 700;
+        padding: 1.5rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        margin: 2rem 0;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3);
+      }
+      .cta-button:hover {
+        background-color: #e65c00;
+        transform: translateY(-2px);
+      }
+      .contact-form {
+        padding: 2rem;
+        background-color: #fcfcfc;
+        border-radius: 10px;
+        border: 1px solid #eee;
+      }
+      .contact-form input[type="text"],
+      .contact-form select {
+        width: calc(100% - 20px);
+        padding: 12px;
+        margin: 0.5rem 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .contact-form button {
+        background-color: #007bff;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+      }
+      .contact-form button:hover {
+        background-color: #0056b3;
+      }
+      .warning-box {
+        background-color: #fff3cd;
+        color: #664d03;
+        padding: 1rem;
+        border: 1px solid #ffc371;
+        border-radius: 6px;
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .graph-container {
+        margin: 2rem 0;
+        background-color: #f7f9fd;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .graph-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* --- Footer Style --- */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+        background-color: #eef1f5;
+        margin-top: 3rem;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      /* --- Responsive adjustments --- */
+      @media (max-width: 768px) {
+        header {
+          padding: 1rem;
+        }
+        header h1 {
+          font-size: 2rem;
+        }
+        nav ul {
+          gap: 1rem;
+          flex-wrap: wrap;
+          margin-top: 1rem;
+        }
+        nav a {
+          font-size: 0.9rem;
+          padding: 0.4rem 0.8rem;
+        }
+        main {
+          padding: 0 1rem;
+        }
+        section {
+          padding: 2rem 0;
+        }
+        h2 { font-size: 1.75rem; }
+        h3 { font-size: 1.3rem; }
+        .keyword-tags { justify-content: flex-start; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>아이실비보험 가입 순위 및 2026년 가격 비교 분석</h1>
+        <p>현명한 부모님을 위한 필수 가이드: <strong>아이실비보험</strong>, 꼼꼼하게 알아보고 최저가로 가입하세요.</p>
+        <nav>
+            <ul>
+                <li><a href="#intro">실비보험이란?</a></li>
+                <li><a href="#compare">보장 비교 및 순위</a></li>
+                <li><a href="#cost">가격 및 견적</a></li>
+                <li><a href="#review">내돈내산 후기</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">무료 상담 신청</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="intro">
+            <h2>아이실비보험, 왜 필수일까요? (2026년 필수 가입 이유)</h2>
+            <div class="highlight">
+                <p><strong>아이실비보험</strong>은 자녀의 질병이나 상해로 인해 발생하는 실제 병원비를 보장해주는 보험입니다. 2026년 기준으로 의료비 부담이 지속적으로 증가하는 상황에서, 특히 면역력이 약한 아이들은 잦은 병원 방문이 불가피합니다. 실손보험은 이러한 의료비 지출에 대한 가장 실질적인 대비책이며, <strong>어린이실비보험</strong>은 일반 실손보험과는 달리 아이들의 특성에 맞춘 보장을 제공하는 경우가 많아 부모님들의 필수 선택으로 자리잡고 있습니다.</p>
+            </div>
+            <p><strong>아이실비보험</strong>은 단순히 병원비뿐만 아니라 통원 치료비, 약제비까지 보장합니다. 사소한 감기부터 큰 사고까지 예측 불가능한 상황에서 발생하는 의료비를 줄여주기 때문에 가정 경제에 안정성을 더해줍니다. 특히 <strong>아이실비보험 가입</strong> 시점은 빠를수록 유리하며, 자녀가 성장하면서 발생할 수 있는 질병 이력으로 인한 가입 제한을 피할 수 있는 장점이 있습니다.</p>
+            <p>많은 부모님들이 <strong>아이실비보험 가입조건</strong>과 <strong>아이실비보험 가격</strong>에 대해 궁금해하십니다. 2026년도 최신 정보를 바탕으로 아이실비보험의 모든 것을 자세히 분석하고, 현명하게 가입하는 방법을 안내해 드리겠습니다.</p>
+
+            <h3>아이실비보험과 일반 어린이보험의 차이점</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>아이실비보험 (실손)</th>
+                            <th>일반 어린이보험 (정액)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>보장 목적</td>
+                            <td>실제 발생한 의료비 보장 (병원비, 약제비)</td>
+                            <td>특정 질병 진단 시 정해진 금액 보장 (진단금, 수술비)</td>
+                        </tr>
+                        <tr>
+                            <td>보장 범위</td>
+                            <td>질병/상해로 인한 입원, 통원 치료비 (자기부담금 제외)</td>
+                            <td>3대 질병 (암, 뇌, 심장) 진단비, 골절 진단비 등</td>
+                        </tr>
+                        <tr>
+                            <td>특징</td>
+                            <td>병원비 지출에 대한 실질적인 보상</td>
+                            <td>큰 질병 발생 시 목돈 마련 목적</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>아이실비보험은 기본적으로 단독 가입이 가능하며, 일반 어린이보험의 특약 형태로 가입하는 것도 가능합니다. <strong>아이실비보험 추천</strong> 상품을 찾을 때, 이 두 가지 보험의 역할과 차이점을 명확히 이해하고 자녀의 필요에 맞는 포트폴리오를 구성하는 것이 중요합니다.</p>
+        </section>
+
+        <section id="compare">
+            <h2>아이실비보험 순위 및 보장 내용 비교 분석 (2026년 기준)</h2>
+            <p><strong>아이실비보험 비교</strong>는 여러 보험사의 상품을 동시에 살펴보는 것이 핵심입니다. 2026년 기준으로 주요 보험사들이 제공하는 상품들은 보장 내용과 자기부담금 비율, 보험료 갱신 주기 등에서 미묘한 차이를 보입니다. <strong>아이실비보험 순위</strong>는 단순히 가격이 싼 곳을 의미하기보다는, 우리 아이에게 필요한 보장을 충분히 제공하면서도 합리적인 <strong>아이실비보험 가격</strong>을 제시하는 상품을 찾는 과정입니다.</p>
+
+            <h3>1. 갱신형 vs. 비갱신형, 현명한 선택은?</h3>
+            <div class="warning-box">
+                <p><strong>핵심 키워드: 갱신형과 비갱신형의 차이점</strong></p>
+                <p><strong>아이실비보험</strong>은 갱신형 상품이 주를 이룹니다. 비갱신형 상품은 실손보험 특성상 판매하지 않거나, 실손보험 외 다른 보장(정액형 보장)을 비갱신으로 구성하는 경우가 대부분입니다. 실손보험 자체는 갱신형으로 운영되며, 갱신 주기는 보통 1년 또는 3년입니다. 갱신 시점에 보험료가 변동될 수 있습니다. 비갱신형은 보험료가 일정 기간 고정되는 형태지만, 실손보험에서는 갱신형이 표준입니다.</p>
+                <p>다만, <strong>어린이보험</strong>의 주요 보장(3대 진단비 등)을 비갱신형으로 가입하고, 실손 특약만 갱신형으로 추가하는 것이 일반적입니다. 비갱신형으로 가입할 경우 초기 보험료는 높지만 장기간 납입 시 총 납입액은 줄어들 수 있다는 장점이 있습니다.</p>
+            </div>
+
+            <h3>2. 아이실비보험 핵심 보장 항목 체크리스트</h3>
+            <p><strong>아이실비보험 추천</strong> 상품을 고를 때 반드시 확인해야 할 보장 항목들입니다. 아이들의 경우 성인과는 달리 면역력 저하로 인한 잦은 통원 치료나, 골절, 화상 등 예측 불가능한 사고가 많기 때문에 이에 특화된 보장 내용이 중요합니다.</p>
+            <ul>
+                <li><strong>입원 치료비:</strong> 질병이나 상해로 입원 시 병실료, 수술비, 약제비 등을 보장합니다. (기준 병실료를 초과하는 상급 병실료는 50%만 보장)</li>
+                <li><strong>통원 치료비:</strong> 외래 진료비와 처방 조제비를 보장합니다. 1회당 정해진 공제금액(자기부담금)을 제외한 금액을 지급합니다.</li>
+                <li><strong>비급여 항목:</strong> 도수치료, 체외충격파, 증식치료, 자기공명영상(MRI), 주사료 등 급여 항목 외 비급여 항목에 대한 보장 여부와 한도를 확인해야 합니다. <strong>아이실비보험</strong>에서 비급여 항목은 특히 중요합니다.</li>
+                <li><strong>어린이 특화 보장:</strong> 아이들만 걸리기 쉬운 아토피, 천식, 소아암 등 특정 질병에 대한 추가 보장이 있는지 확인하면 좋습니다.</li>
+            </ul>
+
+            <div class="table-responsive">
+                <h4>주요 보험사별 아이실비보험 상품 비교 (가상 데이터 기반)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>보험사</th>
+                            <th>상품 특징</th>
+                            <th>주요 보장 내용</th>
+                            <th>평균 보험료 (0세 기준)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>A사</td>
+                            <td>탄탄한 기본 보장, 높은 통원 한도</td>
+                            <td>입원비, 통원비(외래/약제), 비급여 3종(특약)</td>
+                            <td>18,000원</td>
+                        </tr>
+                        <tr>
+                            <td>B사</td>
+                            <td>가성비 강조, 갱신 시점 보험료 상승률 낮음</td>
+                            <td>입원비, 통원비(외래/약제), 치과/한방 치료 일부 보장</td>
+                            <td>16,500원</td>
+                        </tr>
+                        <tr>
+                            <td>C사</td>
+                            <td>프리미엄 보장, 잦은 병원 방문 시 유리</td>
+                            <td>입원비, 통원비(외래/약제), 비급여 3종(특약), 소아암 진단비 추가</td>
+                            <td>21,000원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="cost">
+            <h2>아이실비보험 가격 (비용) 및 견적 분석</h2>
+            <p><strong>아이실비보험 가격</strong>은 여러 요소에 의해 결정됩니다. <strong>아이실비보험 저렴한 곳</strong>을 찾으려면 단순히 최저가를 비교할 것이 아니라, 보장 내용 대비 합리적인 가격을 찾아야 합니다. <strong>아이실비보험 견적</strong>을 비교할 때 영향을 미치는 주요 요소를 아래에서 살펴보겠습니다.</p>
+
+            <h3>1. 아이실비보험 비용에 영향을 미치는 요소</h3>
+            <ul>
+                <li><strong>가입 연령 및 성별:</strong> 나이가 어릴수록 보험료가 저렴합니다. 성별에 따라 미세한 보험료 차이가 있을 수 있습니다.</li>
+                <li><strong>자기부담금 설정:</strong> 자기부담금 비율을 높게 설정할수록 보험료는 낮아집니다. (예: 10% vs. 20% 공제)</li>
+                <li><strong>특약 추가 여부:</strong> 비급여 3종(도수치료, MRI 등) 특약이나 기타 진단비를 추가하면 보험료가 상승합니다.</li>
+                <li><strong>가입 방식:</strong> 단독 실손보험으로 가입하는 것이 가장 저렴하며, 종합보험의 특약 형태로 가입할 경우 상대적으로 보험료가 높아질 수 있습니다.</li>
+            </ul>
+
+            <div class="graph-container">
+                <h3>아이실비보험 평균 가격 그래프 (예상 비용)</h3>
+                <p>가입 연령에 따른 월 보험료 예상치 (표준형 기준)</p>
+                <!-- Image placeholder for graph -->
+                <img src="https://via.placeholder.com/600x400.png?text=아이실비보험+평균+가격+변동+그래프" alt="아이실비보험 연령별 평균 가격 그래프">
+                <p style="font-size: 0.9rem; margin-top: 1rem; color: #777;">* 위 그래프는 2026년 가상 데이터를 기반으로 한 참고 자료입니다. 정확한 견적은 전문가 상담을 통해 확인하세요.</p>
+            </div>
+
+            <h3>2. 아이실비보험 저렴하게 가입하는 팁</h3>
+            <p>많은 부모님들이 <strong>아이보험 싼 곳</strong>을 찾기 위해 발품을 팔지만, 결국 중요한 것은 아이에게 맞는 맞춤형 설계입니다. <strong>내돈내산</strong> 후기를 참고하여 불필요한 특약은 제외하고, 핵심 보장에 집중하는 것이 <strong>아이실비보험 저렴한 곳</strong>을 찾는 비법입니다.</p>
+            <p>또한, 보험 비교 사이트나 전문가를 통해 여러 보험사의 상품을 동시에 비교해 볼 수 있습니다. <strong>아이실비보험 가입 순위</strong>는 매년 변동되므로, 최신 정보를 바탕으로 비교하는 것이 중요합니다. 특히 <strong>아이실비보험 비교</strong>는 여러 보험사의 견적을 받아보는 것이 가장 효과적입니다.</p>
+        </section>
+
+        <section id="review">
+            <h2>아이실비보험 내돈내산 후기 및 현명한 부모님들의 선택</h2>
+            <p>실제 <strong>아이실비보험 후기</strong>는 가입을 고민하는 부모님들에게 가장 중요한 정보입니다. <strong>내돈내산 후기</strong>를 통해 알 수 있듯이, 보장 내용이 실제로 얼마나 도움이 되는지, 보험금 청구가 간편한지 등이 중요합니다.</p>
+            <div class="highlight">
+                <p><strong>후기 요약:</strong> "첫째 아이 때 아무것도 모르고 설계사가 추천하는 대로 가입했다가 비싼 보험료에 비해 보장 내용이 부족하다는 걸 나중에 알게 됐어요. 둘째 아이는 <strong>아이실비보험 순위</strong>를 직접 비교해보고, 통원 치료가 잦다는 점을 고려해서 통원 한도가 높은 상품으로 선택했습니다. <strong>아이실비보험 저렴한 곳</strong>도 중요하지만, 우리 아이에게 꼭 필요한 보장을 찾는 게 더 중요해요."</p>
+            </div>
+
+            <h3>아이실비보험 가입 전 꼭 확인해야 할 점: 보험금 청구의 편리성</h3>
+            <p>아이가 어릴수록 잦은 병원 방문으로 인해 보험금 청구 횟수가 많아집니다. 따라서 보험금 청구 절차가 간편한 보험사를 선택하는 것이 좋습니다. 최근에는 모바일 앱을 통해 영수증 사진 한 장으로 간편하게 청구할 수 있는 시스템을 갖춘 곳들이 많습니다. <strong>아이실비보험 추천</strong> 상품을 결정할 때 서비스 만족도도 함께 고려해야 합니다.</p>
+            <p><strong>아이실비보험 가입 시점</strong>은 빠를수록 좋지만, 태아보험으로 가입할 경우 출산 후 어린이 실손으로 전환되는 과정과 보장 내역을 꼼꼼히 확인해야 합니다. <strong>어린이실비보험 가입</strong>은 아이의 건강 상태가 가장 좋을 때 하는 것이 중요합니다.</p>
+
+            <h3><a href="https://www.fss.or.kr/" target="_blank">금융감독원</a>의 보험 정보 활용</h3>
+            <p>보험 상품에 대한 정확한 정보와 <strong>아이실비보험 가입조건</strong>, <strong>장단점</strong> 등을 확인하기 위해 금융감독원(FSS) 홈페이지를 참고하는 것도 좋은 방법입니다. 금융소비자정보 포털 '파인'에서는 다양한 보험 정보를 투명하게 제공하고 있습니다.</p>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ) - 아이실비보험 가입 A to Z</h2>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. 아이실비보험 가입 시기는 언제인가요?</dt>
+                <dd>A. 빠르면 빠를수록 좋습니다. 태아일 때 태아보험에 실손보험 특약을 추가하여 가입하는 것이 가장 일반적입니다. 출생 후에는 바로 <strong>어린이실비보험</strong>으로 전환됩니다. 아이가 태어난 후 가입할 경우, 혹시 모를 선천적 질병이나 출산 후 질병 이력으로 인해 가입에 제한이 생길 수 있습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q2. 2026년 아이실비보험 보장 내용에 변화가 있나요?</dt>
+                <dd>A. 실손보험은 표준화된 상품이므로 큰 틀은 유지되지만, 비급여 항목에 대한 보장 기준이나 자기부담금 비율 등에 일부 조정이 있을 수 있습니다. <strong>아이실비보험 비교</strong> 시점의 최신 정보를 확인하는 것이 중요합니다. 특히 <strong>아이실비보험 갱신형 비갱신형 차이</strong>에 대한 정확한 이해가 필요합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q3. 아이실비보험 중복 가입이 가능한가요?</dt>
+                <dd>A. 실손보험은 실손 보장의 특성상 여러 개 가입해도 비례보상됩니다. 즉, 보험료만 이중으로 납입하고 보장은 한 번만 받을 수 있습니다. 따라서 <strong>아이실비보험 가입</strong>은 중복으로 할 필요가 없습니다. 다만 정액형 보장은 중복 가입 시 각 보험사로부터 보장 금액을 모두 받을 수 있습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q4. 아이실비보험 <strong>평균 금액</strong>은 얼마인가요?</dt>
+                <dd>A. <strong>아이실비보험 평균 금액</strong>은 가입 연령, 성별, 특약 구성에 따라 크게 달라집니다. 0세 기준으로는 월 15,000원에서 25,000원 선이 일반적이며, 특약 추가 시 금액은 높아집니다. <strong>아이실비보험 저렴한 곳</strong>을 찾으려면 특약 구성을 최소화하고 단독 실손으로 가입하는 방법을 고려할 수 있습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q5. <strong>아이실비보험 추천</strong> 상품은 무엇인가요?</dt>
+                <dd>A. 특정 상품을 추천하기보다는 자녀의 건강 상태, 가족력, 필요한 보장 범위 등을 고려하여 맞춤형으로 설계하는 것을 권장합니다. <strong>아이실비보험 순위</strong>는 개인의 상황에 따라 달라질 수 있으므로, 전문가와 상담을 통해 최적의 상품을 선택하는 것이 가장 현명한 방법입니다. <a href="https://www.insure.or.kr/" target="_blank">보험협회</a> 등 공신력 있는 기관의 정보를 참고하여 <strong>아이실비보험 비교</strong>를 진행하세요.</dd>
+            </dl>
+        </section>
+
+        <section id="contact">
+            <h2>아이실비보험 무료 견적 비교 상담 신청</h2>
+            <p><strong>아이실비보험 가입</strong>, 이제 더 이상 고민하지 마세요. 전문가와 1:1 상담을 통해 우리 아이에게 꼭 맞는 <strong>아이실비보험 순위</strong>와 <strong>아이실비보험 가격</strong>을 정확하게 비교해 드립니다. <strong>아이보험 저렴한 곳</strong>을 찾고 계신다면 지금 바로 상담 신청하세요.</p>
+            <div class="contact-form">
+                <form action="#" method="post">
+                    <label for="name">이름 (자녀 또는 부모님)</label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
+
+                    <label for="child-age">자녀 연령 (가입 대상)</label>
+                    <select id="child-age" name="child-age" required>
+                        <option value="">-- 선택 --</option>
+                        <option value="0">0세 (태아/신생아)</option>
+                        <option value="1">1세</option>
+                        <option value="2">2세</option>
+                        <option value="3">3세</option>
+                        <option value="4">4세</option>
+                        <option value="5">5세</option>
+                        <option value="6">6세</option>
+                        <option value="7">7세</option>
+                        <option value="8">8세</option>
+                        <option value="9">9세</option>
+                        <option value="10+">10세 이상</option>
+                    </select>
+
+                    <label for="phone">연락처</label>
+                    <input type="text" id="phone" name="phone" placeholder="휴대폰 번호를 입력해주세요" required>
+
+                    <label for="contact-time">상담 희망 시간</label>
+                    <input type="text" id="contact-time" name="contact-time" placeholder="예: 평일 오전 10시~12시">
+
+                    <button type="submit" aria-label="아이실비보험 무료 견적 상담 신청">무료 견적 상담 신청</button>
+                    <p style="text-align: center; font-size: 0.85rem; color: #777; margin-top: 1rem;">* 상담 신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.</p>
+                </form>
+            </div>
+            <a href="tel:01012345678" class="cta-button">전화로 바로 문의하기</a>
+        </section>
+
+        <section id="related-info">
+            <h2>관련 키워드 및 추가 정보 (SEO 최적화)</h2>
+            <div class="keyword-tags" aria-label="연관 키워드">
+                <a href="#compare">아이실비보험 순위</a>
+                <a href="#cost">아이실비보험 평균 가격</a>
+                <a href="#review">아이실비보험 내돈내산</a>
+                <a href="#">어린이 실손보험 추천</a>
+                <a href="#">아이보험 갱신 비갱신 차이</a>
+                <a href="#">태아보험 실비 특약</a>
+                <a href="#">어린이보험 싼 곳</a>
+                <a href="#">아이실비보험 견적 비교</a>
+                <a href="#">아이실비보험 가입 조건</a>
+                <a href="#">어린이 실손보험 보장 내용</a>
+                <a href="#">2026년 아이실비보험 개정</a>
+                <a href="#">아이실비보험 장점 단점</a>
+                <a href="#">자녀 보험료 계산</a>
+                <a href="#">영유아 실손보험</a>
+                <a href="#">아기 실비보험 가입</a>
+                <a href="#">어린이보험 비교 사이트</a>
+                <a href="#">가족력 있는 아이 보험 가입</a>
+                <a href="#">비급여 항목 실손보험</a>
+                <a href="#">아이실비보험 만기 설정</a>
+                <a href="#">어린이보험 추천 순위</a>
+                <a href="#">아이보험료 저렴하게</a>
+                <a href="#">실손보험 청구 방법</a>
+                <a href="#">어린이보험 특약 분석</a>
+                <a href="#">아이실비보험 가입 후기</a>
+                <a href="#">실비보험 1년 갱신 3년 갱신</a>
+                <a href="#">어린이보험 비갱신 장단점</a>
+                <a href="#">아이실비보험 보장 축소</a>
+                <a href="#">아이실비보험 병력 고지 의무</a>
+                <a href="#">아이실비보험 가입 시 주의사항</a>
+                <a href="#">어린이 실비보험 추천상품</a>
+            </div>
+            <p style="text-align: center; font-size: 0.85rem; color: #777; margin-top: 1rem;">* 함께 많이 찾는 키워드를 참고하여 최적의 정보를 제공합니다.</p>
+
+            <h3><a href="https://namu.wiki/w/%EC%8B%A4%EC%86%90%EB%B3%B4%ED%97%98" target="_blank">나무위키</a> 및 <a href="https://www.e-insmarket.or.kr/" target="_blank">보험다모아</a> 등 외부 정보 활용</h3>
+            <p><strong>아이실비보험</strong>에 대한 정확한 정보는 <a href="https://www.e-insmarket.or.kr/" target="_blank">보험다모아</a> 같은 공신력 있는 사이트를 통해 확인할 수 있습니다. 나무위키 등에서도 실손보험의 역사나 보장 내용을 참고할 수 있습니다. <strong>아이실비보험 비교</strong>는 여러 출처의 정보를 종합적으로 판단하는 것이 현명합니다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=246078&viewCls=reAd" target="_blank">보험업법</a> 등 법률적 근거도 확인해 볼 수 있습니다.</p>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>&copy; 2026 아이실비보험 전문 컨설팅 센터. 모든 권리 보유.</p>
+        <p>상호: (주)보험컨설팅 | 주소: 서울특별시 강남구 테헤란로 123 | 사업자등록번호: 123-45-67890</p>
+        <p>본 페이지는 보험 가입 권유를 목적으로 하며, 상담 신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.</p>
+    </footer>
+
+    <script>
+      // FAQ 아코디언 기능 (접기/펼치기)
+      document.querySelectorAll('dl dt').forEach((dt) => {
+        dt.addEventListener('click', () => {
+          dt.classList.toggle('active');
+          let expanded = dt.getAttribute('aria-expanded') === 'true';
+          dt.setAttribute('aria-expanded', !expanded);
+        });
+        dt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dt.click();
+          }
+        });
+      });
+    </script>
+
+
+  
